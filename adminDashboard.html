@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard | Investment App</title>
+  <style>
+    body { font-family: sans-serif; background: #f0f0f0; text-align: center; padding: 50px; }
+    .dashboard { background: white; padding: 20px; border-radius: 10px; display: inline-block; }
+    ul { text-align: left; }
+    li { margin: 10px 0; }
+    a { text-decoration: none; color: blue; }
+    button { background: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; margin-top: 20px; }
+  </style>
+</head>
+<body>
+
+<script>
+  // Restrict access if not logged in as admin
+  if(localStorage.getItem('adminLoggedIn') !== 'true'){
+    alert('Access denied. Please login as admin.');
+    window.location.href = 'admin.html';
+  }
+</script>
+
+<div class="dashboard">
+  <h2>Welcome Admin</h2>
+  <p>Here you can manage users, see deposit and withdrawal requests.</p>
+  <ul>
+    <li><a href="viewUsers.html">View all users</a></li>
+    <li><a href="approveDeposits.html">Approve deposits</a></li>
+    <li><a href="approveWithdrawals.html">Approve withdrawals</a></li>
+    <li><a href="changePayment.html">Change payment number & name</a></li>
+  </ul>
+  <button onclick="logoutAdmin()">Logout</button>
+</div>
+
+<script>
+  function logoutAdmin(){
+    localStorage.removeItem('adminLoggedIn');
+    window.location.href = 'admin.html';
+  }
+</script>
+
+</body>
+</html>

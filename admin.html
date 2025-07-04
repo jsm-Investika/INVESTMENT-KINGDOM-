@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login | Investment App</title>
+  <style>
+    body { font-family: sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; background: #f0f0f0; }
+    .login-container { background: white; padding: 20px; border-radius: 10px; width: 300px; text-align: center; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input { width: 90%; padding: 10px; margin: 10px 0; }
+    button { background: green; color: white; padding: 10px 20px; border: none; border-radius: 5px; }
+  </style>
+</head>
+<body>
+
+<div class="login-container">
+  <h2>Admin Login</h2>
+  <input type="password" id="adminPassword" placeholder="Enter Admin Password" />
+  <button onclick="loginAdmin()">Login</button>
+</div>
+
+<script>
+  function loginAdmin(){
+    const password = document.getElementById('adminPassword').value;
+    if(password === "626269jsm"){
+      localStorage.setItem('adminLoggedIn', 'true');
+      window.location.href = 'adminDashboard.html';
+    } else {
+      alert("Incorrect Password");
+    }
+  }
+</script>
+
+</body>
+</html>

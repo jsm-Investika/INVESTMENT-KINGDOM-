@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register | Investment App</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>User Registration</h2>
+    <form id="registerForm">
+      <label for="phone">Phone Number</label>
+      <input type="text" id="phone" name="phone" required />
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required />
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required />
+
+      <button type="submit">Register</button>
+    </form>
+    <p>Already have an account? <a href="index.html">Login here</a></p>
+  </div>
+
+  <script>
+    document.getElementById('registerForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const phone = document.getElementById('phone').value;
+      const email = document.getElementById('email').value;
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      let users = JSON.parse(localStorage.getItem('users')) || [];
+
+      // Check if phone already registered
+      const exist = users.find(u => u.phone === phone);
+      if(exist){
+        alert('Phone number already registered. Please login.');
+        window.location.href = 'index.html';
+        return;
+      }
+
+      users.push({ phone, email, username, password, balance: 0 });
+      localStorage.setItem('users', JSON.stringify(users));
+
+      // Set current user session
+      localStorage.setItem('currentUser', username);
+
+      alert('Registration successful. Welcome '+username);
+      window.location.href = 'dashboard.html';
+    });
+  </script>
+</body>
+</html>

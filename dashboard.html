@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard | Investment App</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .tab { display: none; }
+    .active { display: block; }
+    .tabs button { margin: 5px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome, <span id="username"></span></h2>
+
+    <div class="tabs">
+      <button onclick="showTab('home')">🏠 HOME</button>
+      <button onclick="showTab('wallet')">💰 WALLET</button>
+      <button onclick="logout()">🚪 LOGOUT</button>
+    </div>
+
+    <div id="home" class="tab active">
+      <h3>About Investment App</h3>
+      <p>This app allows you to invest and earn 15% profit monthly.</p>
+      <p>Contact Customer Care: <strong>0746838432</strong></p>
+    </div>
+
+    <div id="wallet" class="tab">
+      <h3>Your Wallet</h3>
+      <p>Balance: <span id="balance">0</span> TZS</p>
+
+      <h4>Deposit</h4>
+      <form id="depositForm">
+        <input type="number" id="depositAmount" placeholder="Amount to deposit" required />
+        <input type="text" id="depositNumber" placeholder="Your phone number" required />
+        <input type="text" id="depositNetwork" placeholder="Network (e.g M-Pesa)" required />
+        <button type="submit">Deposit Now</button>
+      </form>
+
+      <p>Pay to: <strong>0746838432 (M-Pesa, BARAKA)</strong></p>
+
+      <h4>Withdraw</h4>
+      <form id="withdrawForm">
+        <input type="number" id="withdrawAmount" placeholder="Amount to withdraw" required />
+        <input type="text" id="withdrawNumber" placeholder="Phone number to receive" required />
+        <input type="text" id="withdrawName" placeholder="Receiver Name" required />
+        <input type="text" id="withdrawNetwork" placeholder="Network" required />
+        <button type="submit">Withdraw Now</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Show username
+    const username = localStorage.getItem('currentUser');
+    document.getElementById('username').innerText = username ? username : 'User';
+
+    // Switch tabs
+    function showTab(tabId){
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+    }
+
+    // Logout
+    function logout(){
+      localStorage.removeItem('currentUser');
+      window.location.href = 'index.html';
+    }
+
+    // Deposit Form Submission
+    document.getElementById('depositForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const amount = document.getElementById('depositAmount').value;
+      const number = document.getElementById('depositNumber').value;
+      const network = document.getElementById('depositNetwork').value;
+
+      alert(`Deposit request sent.\nAmount: ${amount}\nNumber: ${number}\nNetwork: ${network}`);
+      // Hapa admin ataona deposit request manually
+      document.getElementById('depositForm').reset();
+    });
+
+    // Withdraw Form Submission
+    document.getElementById('withdrawForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const amount = document.getElementById('withdrawAmount').value;
+      const number = document.getElementById('withdrawNumber').value;
+      const name = document.getElementById('withdrawName').value;
+      const network = document.getElementById('withdrawNetwork').value;
+
+      alert(`Withdraw request sent.\nAmount: ${amount}\nNumber: ${number}\nName: ${name}\nNetwork: ${network}`);
+      // Hapa admin ataona withdraw request manually
+      document.getElementById('withdrawForm').reset();
+    });
+  </script>
+</body>
+</html>
